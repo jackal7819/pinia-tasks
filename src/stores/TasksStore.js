@@ -1,13 +1,16 @@
+import { computed, ref } from 'vue';
+import { defineStore } from 'pinia';
+
 export const useTasksStore = defineStore('tasks', () => {
 	const tasks = ref([
-		{ id: 1, title: 'Task 1', completed: false },
-		{ id: 2, title: 'Task 2', completed: false },
-		{ id: 3, title: 'Task 3', completed: false },
+		{ id: 1, title: 'Do homework', completed: false, isFavorite: false },
+		{ id: 2, title: 'Watch TV', completed: false, isFavorite: false },
+		{ id: 3, title: 'Play guitar', completed: false, isFavorite: true },
 	]);
 
-	const getTasks = () => {
-		return tasks.value;
-	};
+	const name = ref('Pinia Tasks');
+
+	const getTasks = computed(() => tasks.value);
 
 	const addTask = (title) => {
 		const newTask = {
@@ -29,5 +32,5 @@ export const useTasksStore = defineStore('tasks', () => {
 		tasks.value = tasks.value.filter((task) => task.id !== taskID);
 	};
 
-	return { tasks, getTasks, addTask, toggleTask, removeTask };
+	return { tasks, name, getTasks, addTask, toggleTask, removeTask };
 });
