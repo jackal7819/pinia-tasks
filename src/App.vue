@@ -6,9 +6,10 @@
 	import TaskForm from './components/TaskForm.vue';
 	import Loader from './components/Loader.vue';
 
-	const store = useTasksStore();
-	const { name, isLoading, allTasks, favoriteTasks } = storeToRefs(store);
-	const { fetchTasks } = useTasksStore();
+	const tasksStore = useTasksStore();
+	const { name, isLoading, allTasks, favoriteTasks } =
+		storeToRefs(tasksStore);
+	const { fetchTasks } = tasksStore;
 	fetchTasks();
 	const filter = ref('all');
 </script>
