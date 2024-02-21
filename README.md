@@ -1,29 +1,27 @@
-# pinia-tasks
+# Pinia Tasks
 
-This template should help get you started developing with Vue 3 in Vite.
+Pinia Tasks is a simple task management application. You can add new tasks, delete them, mark them as favorites, display all tasks or only favorites, and also mark tasks as completed.
 
-## Recommended IDE Setup
+## Technologies
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+The application is developed using the following technologies:
 
-## Customize configuration
+- Vue.js 3 - Progressive JavaScript framework
+- Pinia - Vue 3-based state management
+- Axios - HTTP client for network requests
+- Nanoid - Library for generating unique identifiers
+- Vite - Fast application bundler
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Functionality
 
-## Project Setup
+Pinia Tasks provides the following features:
 
-```sh
-npm install
-```
+- Adding new tasks
+- Deleting tasks
+- Adding tasks to favorites
+- Displaying all tasks or only favorites
+- Marking tasks as completed (crossing out the task name)
 
-### Compile and Hot-Reload for Development
+## Data Storage
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Tasks are stored in a Firebase database.
