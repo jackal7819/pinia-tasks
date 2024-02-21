@@ -2,6 +2,7 @@
 	import { ref } from 'vue';
 	import { useTasksStore } from './stores/TasksStore';
 	import TaskDetails from './components/TaskDetails.vue';
+	import TaskForm from './components/TaskForm.vue';
 
 	const { tasks, name, getAllTasks, getFavoriteTasks } = useTasksStore();
 	const filter = ref('all');
@@ -15,6 +16,8 @@
 			<img src="./assets/pinia.svg" alt="pinia" class="w-20" />
 			<h1 class="text-3xl font-bold">{{ name }}</h1>
 		</header>
+
+		<TaskForm />
 
 		<nav class="flex gap-5">
 			<button
@@ -37,11 +40,11 @@
 		>
 			<p class="text-center">All Tasks: {{ getAllTasks.length }}</p>
 			<li
-				v-for="task in getAllTasks"
+				v-for="(task, index) in getAllTasks"
 				:key="task.id"
 				class="flex flex-col justify-between gap-10 px-5 py-2 border rounded-xl bg-slate-800"
 			>
-				<TaskDetails :task="task" />
+				<TaskDetails :index="index" :task="task" />
 			</li>
 		</ul>
 
@@ -53,11 +56,11 @@
 				Favorite Tasks: {{ getFavoriteTasks.length }}
 			</p>
 			<li
-				v-for="task in getFavoriteTasks"
+				v-for="(task, index) in getFavoriteTasks"
 				:key="task.id"
 				class="flex flex-col justify-between gap-10 px-5 py-2 border rounded-xl bg-slate-800"
 			>
-				<TaskDetails :task="task" />
+				<TaskDetails :index="index" :task="task" />
 			</li>
 		</ul>
 	</main>

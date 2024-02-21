@@ -1,11 +1,12 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
+import { nanoid } from 'nanoid';
 
 export const useTasksStore = defineStore('tasks', () => {
 	const tasks = ref([
-		{ id: 1, title: 'Do homework', completed: false, isFavorite: false },
-		{ id: 2, title: 'Watch TV', completed: false, isFavorite: false },
-		{ id: 3, title: 'Play guitar', completed: false, isFavorite: true },
+		{ id: nanoid(), title: 'Do homework', completed: false, isFavorite: false },
+		{ id: nanoid(), title: 'Watch TV', completed: false, isFavorite: false },
+		{ id: nanoid(), title: 'Play guitar', completed: false, isFavorite: true },
 	]);
 
 	const name = ref('Pinia Tasks');
@@ -17,7 +18,7 @@ export const useTasksStore = defineStore('tasks', () => {
 
 	const addTask = (title) => {
 		const newTask = {
-			id: tasks.value.length + 1,
+			id: nanoid(),
 			title,
 			completed: false,
 		};
