@@ -10,7 +10,10 @@ export const useTasksStore = defineStore('tasks', () => {
 
 	const name = ref('Pinia Tasks');
 
-	const getTasks = computed(() => tasks.value);
+	const getAllTasks = computed(() => tasks.value);
+	const getFavoriteTasks = computed(() =>
+		tasks.value.filter((task) => task.isFavorite)
+	);
 
 	const addTask = (title) => {
 		const newTask = {
@@ -32,5 +35,13 @@ export const useTasksStore = defineStore('tasks', () => {
 		tasks.value = tasks.value.filter((task) => task.id !== taskID);
 	};
 
-	return { tasks, name, getTasks, addTask, toggleTask, removeTask };
+	return {
+		tasks,
+		name,
+		getAllTasks,
+		getFavoriteTasks,
+		addTask,
+		toggleTask,
+		removeTask,
+	};
 });
