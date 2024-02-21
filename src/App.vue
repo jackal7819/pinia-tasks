@@ -4,15 +4,18 @@
 	import { useTasksStore } from './stores/TasksStore';
 	import TaskDetails from './components/TaskDetails.vue';
 	import TaskForm from './components/TaskForm.vue';
+	import Loader from './components/Loader.vue';
 
 	const store = useTasksStore();
-	const { name, allTasks, favoriteTasks } = storeToRefs(store);
+	const { name, isLoading, allTasks, favoriteTasks } = storeToRefs(store);
+	const { fetchTasks } = useTasksStore();
+	fetchTasks();
 	const filter = ref('all');
 </script>
 
 <template>
 	<main
-		class="flex flex-col items-center justify-center min-h-screen gap-10 p-10 bg-slate-900 text-slate-400"
+		class="flex flex-col items-center justify-center min-h-screen gap-10 p-10 bg-slate-900 text-slate-300"
 	>
 		<header class="flex flex-col items-end gap-10 p-10 border-b">
 			<div class="flex items-end gap-10">
@@ -36,6 +39,8 @@
 				Favorite Tasks
 			</button>
 		</nav>
+
+		<Loader v-if="isLoading" />
 
 		<ul
 			class="flex flex-col w-full max-w-3xl gap-5"

@@ -1,29 +1,11 @@
+import axios from 'axios';
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { nanoid } from 'nanoid';
 
 export const useTasksStore = defineStore('tasks', () => {
-	const tasks = ref([
-		{
-			id: nanoid(),
-			title: 'Do homework',
-			completed: true,
-			isFavorite: false,
-		},
-		{
-			id: nanoid(),
-			title: 'Watch TV',
-			completed: false,
-			isFavorite: false,
-		},
-		{
-			id: nanoid(),
-			title: 'Play guitar',
-			completed: false,
-			isFavorite: true,
-		},
-	]);
-
+	const tasks = ref([]);
+	const isLoading = ref(false);
 	const name = ref('Pinia Tasks');
 
 	const allTasks = computed(() => tasks.value);
@@ -31,6 +13,19 @@ export const useTasksStore = defineStore('tasks', () => {
 		tasks.value.filter((task) => task.isFavorite)
 	);
 
+	const fetchTasks = async () => {
+		try {
+			isLoading.value = true;
+			const response = await axios.get(
+				'https://pinia-tasks-c89c1-default-rtdb.europe-west1.firebasedatabase.app/.json'
+			);
+			tasks.value = response.data.tasks;
+			isLoading.value = false;
+		} catch (error) {
+			console.log(error);
+			isLoading.value = false;
+		}
+	};
 	const addTask = (title) => {
 		const newTask = {
 			id: nanoid(),
@@ -61,8 +56,10 @@ export const useTasksStore = defineStore('tasks', () => {
 	return {
 		tasks,
 		name,
+		isLoading,
 		allTasks,
 		favoriteTasks,
+		fetchTasks,
 		addTask,
 		toggleTask,
 		toggleFavorite,
