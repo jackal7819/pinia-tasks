@@ -4,10 +4,15 @@
 
 	const { addTask } = useTasksStore();
 	const title = ref('');
+
+	const handleSubmit = () => {
+		addTask(title.value);
+		title.value = '';
+	};
 </script>
 
 <template>
-	<form @submit.prevent="addTask(title)" class="flex w-full">
+	<form @submit.prevent="handleSubmit" class="flex w-full">
 		<input
 			type="text"
 			placeholder="Add Task"
